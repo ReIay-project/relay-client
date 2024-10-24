@@ -8,28 +8,48 @@
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
     "tauri": "tauri",
-    "tauri:dev": "tauri dev"
+    "tauri:dev": "tauri dev",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@tauri-apps/api": "^2",
     "@tauri-apps/plugin-shell": "^2",
+    "@volar/language-server": "2.4.0-alpha.18",
     "vue": "^3.3.4"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "^1.9.0",
+    "@storybook/addon-essentials": "^8.3.6",
+    "@storybook/addon-interactions": "^8.3.6",
+    "@storybook/addon-links": "^8.3.6",
+    "@storybook/addon-onboarding": "^8.3.6",
+    "@storybook/blocks": "^8.3.6",
+    "@storybook/test": "^8.3.6",
+    "@storybook/vue3": "^8.3.6",
+    "@storybook/vue3-vite": "^8.3.6",
     "@tauri-apps/cli": "^2",
     "@typescript-eslint/eslint-plugin": "^7.15.0",
     "@typescript-eslint/parser": "^7.15.0",
     "@vitejs/plugin-vue": "^5.0.5",
     "@vue/eslint-config-typescript": "^13.0.0",
+    "@vue/language-server": "2.0.28",
     "autoprefixer": "^10.4.20",
     "daisyui": "^4.12.13",
     "eslint": "^8.57.0",
+    "eslint-plugin-storybook": "^0.10.1",
     "eslint-plugin-vue": "^9.26.0",
     "postcss": "^8.4.47",
+    "storybook": "^8.3.6",
     "tailwindcss": "^3.4.14",
-    "typescript": "^5.2.2",
+    "typescript": "^5.6.3",
     "vite": "^5.3.1",
     "vite-plugin-eslint": "^1.8.1",
     "vue-tsc": "^2.0.22"
+  },
+  "eslintConfig": {
+    "extends": [
+      "plugin:storybook/recommended"
+    ]
   }
 }
