@@ -16,6 +16,7 @@
     "@tauri-apps/api": "^2",
     "@tauri-apps/plugin-shell": "^2",
     "@volar/language-server": "2.4.0-alpha.18",
+    "pinia": "^2.2.4",
     "vue": "^3.3.4"
   },
   "devDependencies": {
