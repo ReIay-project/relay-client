@@ -1,4 +1,4 @@
-import type {IRuleFunction} from "../interface";
+import type { IRuleFunction } from '../interface';
 
 export default function defineRule(fn: IRuleFunction, message: string) {
   return {
@@ -6,3 +6,4 @@ export default function defineRule(fn: IRuleFunction, message: string) {
     message,
   };
 }
+ 

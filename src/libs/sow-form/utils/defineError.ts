@@ -1,4 +1,4 @@
-import type {IError} from "../interface";
+import type { IError } from '../interface';
 
 export default function defineError(name: string, message: string): IError {
   return {
@@ -7,3 +7,4 @@ export default function defineError(name: string, message: string): IError {
     message,
   };
 }
+ 

@@ -8,5 +8,6 @@ export interface IField {
   readonly modelValue: WritableComputedRef<string> | Ref<string>;
   readonly invalidMessage: ComputedRef<string>;
   readonly addServerError: (error: IError) => void;
+  readonly validate: () => void;
 }
  
