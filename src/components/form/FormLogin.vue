@@ -51,7 +51,7 @@
     class="toast"
   >
     <div class="alert alert-info">
-      <span>New message arrived.</span>
+      <span>Login success</span>
     </div>
   </div>
 </template>
