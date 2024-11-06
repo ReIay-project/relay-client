@@ -1,4 +1,4 @@
-import { Ref, ref } from 'vue';
+import { computed, Ref, ref } from 'vue';
 
 
 type AsyncFunction = (...args: unknown[]) => Promise<unknown>
@@ -6,7 +6,7 @@ type FunctionMap = Record<string, AsyncFunction>
 
 /**
  * useAwait is a composable that adds an `isAwait` flag while at least one of the promises is being resolved.
- * @version 1.0.0
+ * @version 1.0.1
  * @template T - A map of functions that return a promise.
  * @param {T} fns - An object where each property is a function that returns a promise.
  * @returns An object with the same shape as `fns`, but each function is wrapped to set `isAwait` to true before it's called and false after it resolves. Also includes the `isAwait` ref itself.
@@ -17,7 +17,8 @@ type FunctionMap = Record<string, AsyncFunction>
  * console.log(isAwait.value); // false
  */
 export function useAwait<T extends FunctionMap>(fns: T): { isAwait: Ref<boolean> } & T {
-  const isAwait = ref(false);
+  const isAwait = computed(() => activeRequests.value > 0);
+  const activeRequests = ref(0);
 
   const wrappedFns: Partial<T> = {};
   for (const key in fns) {
@@ -25,10 +26,10 @@ export function useAwait<T extends FunctionMap>(fns: T): { isAwait: Ref<boolean>
     // @ts-expect-error
     wrappedFns[key as keyof T] = async (...args: unknown[]) => {
       try {
-        isAwait.value = true;
+        activeRequests.value += 1;
         return await fns[key](...args);
       } finally {
-        isAwait.value = false;
+        activeRequests.value -= 1;
       }
     };
   }
