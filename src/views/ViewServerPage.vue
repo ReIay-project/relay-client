@@ -1,5 +1,7 @@
 <template>
-  <div class="w-full h-full p-6">
+  <div
+    class="w-full h-full p-6"
+  >
     <component :is="isRenderedComponent" />
   </div>
 </template>
