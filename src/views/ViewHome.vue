@@ -14,7 +14,6 @@
 </template>
 
 <script setup lang="ts">
-
 import FormLogin from '../components/form/FormLogin.vue';
 </script>
 
