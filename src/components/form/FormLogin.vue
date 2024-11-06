@@ -1,6 +1,5 @@
 <template>
-  <SowForm
-    ref="loginForm"
+  <form
     class="space-y-4"
     @submit.prevent="onSubmit"
   >
@@ -8,19 +7,16 @@
       Login
     </h4>
     <UiInput
-      v-model="formData.host"
       label="Host/IP:"
+      name="host"
       placeholder="Type your host ..."
-      :rules="rules"
     />
     <UiInput
-      v-model="formData.name"
       label="Username:"
+      name="username"
       placeholder="Type your username ..."
-      :rules="rules"
     />
     <UiInput
-      v-model="formData.password"
       label="Password:"
       placeholder="Type server password ..."
       type="password"
@@ -43,40 +39,34 @@
         <span v-else>Submit</span>
       </button>
     </div>
-  </Sowform>
 
-  <!-- Нужно продумать как будут работать тосты -->
-  <div
-    v-if="isProcessing"
-    class="toast"
-  >
-    <div class="alert alert-info">
-      <span>Login success</span>
+    <!-- Нужно продумать как будут работать тосты -->
+    <div
+      v-if="isProcessing"
+      class="toast"
+    >
+      <div class="alert alert-info">
+        <span>Login success</span>
+      </div>
     </div>
-  </div>
+  </form>
 </template>
 
 <script setup lang="ts">
 import UiInput from '../ui/UiInput/UiInput.vue';
-import { SowForm } from '../../libs/sow-form/components';
-import { ref } from 'vue';
 import { useAwait, useProcessing } from '../../assets/composables';
 import { delay } from '../../assets/utils';
-import { defineRule } from '../../libs/sow-form/utils';
+import { useForm } from 'vee-validate';
+import { object, string } from 'yup';
 
-const loginForm = ref<InstanceType<typeof SowForm> | null>(null);
 
 
-const formData = ref({
-  host: '',
-  name: '',
-  password: ''
+const { validate } = useForm({
+  validationSchema: object({
+    host: string().required(),
+    username: string().required(),
+  })
 });
-
-const rules = [
-  defineRule((v) => !!v, 'This field is required.')
-];
-
 const { isProcessing, start } = useProcessing();
 
 const {
@@ -84,10 +74,11 @@ const {
   onSubmit
 } = useAwait({
   async onSubmit() {
-    if (loginForm.value?.validate()) {
+    const { valid } = await validate();
+
+    if (valid) {
       await delay(2000);
       start();
-
     }
   }
 });
