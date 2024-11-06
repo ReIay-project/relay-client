@@ -1,5 +1,7 @@
 enum Route  {
-  HOME = 'home'
+  home = 'home',
+  server = 'server',
+  serverPage = 'serverPage'
 }
 
 export default Route;

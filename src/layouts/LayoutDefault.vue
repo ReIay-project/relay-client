@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <div>Layout default</div>
+  <div class="w-screen h-screen">
     <RouterView />
   </div>
 </template>
